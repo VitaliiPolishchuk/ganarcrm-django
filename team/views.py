@@ -127,8 +127,8 @@ def cancel_plan(request):
   try:
     stripe.api_key = settings.STRIPE_SECRET_KEY
     stripe.Subscription.delete(team.stripe_subscription_id)
-  except Exception:
-    return HttpResponse(status=400)
+  except Exception as e:
+    return HttpResponse(str(e),status=400)
   
   serializer = TeamSerializer(team)
 
